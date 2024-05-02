@@ -1,0 +1,14 @@
+package basic.exercise.test01;
+
+public class B {
+
+	C c;
+	
+	public B() {
+		c = new C();
+		//c.getName();
+	}
+	public String getName() {
+		return c.getName();
+	}
+}
