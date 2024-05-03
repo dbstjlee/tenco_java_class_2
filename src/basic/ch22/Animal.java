@@ -7,15 +7,12 @@ interface Animal { // 클래스가 아닌 인터페이스임.
 	// public abstract void eat();
 	// public abstract void move();
 
-	// 축약 가능
+	// public abstract 생략 가능
 	void eat();
-
 	void move();
-
 }
-
-// 추상클래스가 되거나 add unimple~
-class Dog implements Animal { // 상속 - extends 대신 구현하다는 의미의 implements 사용함.
+ 
+class Dog implements Animal { // 상속(extends) 대신 구현하다는 의미의 implements 사용함.
 
 	@Override
 	public void eat() {
@@ -26,7 +23,6 @@ class Dog implements Animal { // 상속 - extends 대신 구현하다는 의미�
 	public void move() {
 		System.out.println("촐랑촐랑 다닌다");
 	}
-
 }
 
 class Bird implements Animal {
@@ -40,5 +36,4 @@ class Bird implements Animal {
 	public void move() {
 		System.out.println("날라 다니다");
 	}
-
 }
