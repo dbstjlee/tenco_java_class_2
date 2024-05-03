@@ -1,24 +1,24 @@
 package structure;
 /**
- * 배열을 활용 클래스를 설계 물론 --> 이미 자바 표준 API 개발자들이 잘 만들어 준 클래스 들이 존재 한다. 하지만 직접 기능을
- * 확장해서 만들어 보자.
+ * 배열을 활용 클래스를 설계 물론 --> 이미 자바 표준 API 개발자들이 잘 만들어 준 클래스 들이 존재한다. 
+ * 하지만 직접 기능을 확장해서 만들어 보자.
  */
 public class TencoIntArray {
 
-	int[] intArr;
+	int[] intArr; //intArr 배열 공간 선언
 	int count; // 배열 안에 들어간 요소의 개수
-	public final int ARRAY_SIZE;
-	public static final int ERROR_NUM = -99999999;
+	public final int ARRAY_SIZE; // 배열 크기
+	public static final int ERROR_NUM = -99999999; 
 
-	public TencoIntArray() {
-		count = 0;
-		ARRAY_SIZE = 10;
-		intArr = new int[ARRAY_SIZE];
+	public TencoIntArray() { //기본 생성자
+		count = 0; // 요소 = 0개
+		ARRAY_SIZE = 10; // 배열 크기 = 10
+		intArr = new int[ARRAY_SIZE];  //배열 크기가 10개 초기화 
 	}
 
-	public TencoIntArray(int size) {
+	public TencoIntArray(int size) { //생성자 오버로딩
 		count = 0;
-		ARRAY_SIZE = size;
+		ARRAY_SIZE = size; // 입력한 값이 배열크기가 됨.
 		intArr = new int[ARRAY_SIZE];
 	}
 
@@ -26,9 +26,9 @@ public class TencoIntArray {
 	// 배열 요소의 제일 뒤에 값을 추가하는 기능을 가진다.
 	public void addElement(int inputData) {
 		// 방어적 코드 필요
-		if (count >= ARRAY_SIZE) {
+		if (count >= ARRAY_SIZE) { // 요소가 배열 크기보다 크거나 같으면 공간이 참.
 			System.out.println("메모리 공간이 가득 찼습니다.");
-			return; // 실행의 제어권을 반납
+			return; // 실행의 제어권을 반납 // if 문 수행 시 밑에 코드로 안 넘어감.
 		}
 		intArr[count++] = inputData; // 메서드로 감싸서 편리하게 쓸 수 있음.
 		// count++;
@@ -41,7 +41,7 @@ public class TencoIntArray {
 		// 방어적 코드
 		// 배열의 크기 10
 		// [0] [1] [2] --> 3 3 - 1 = 2
-		if (position < 0 || position > count - 1) {
+		if (position < 0 || position > count - 1) { // 할당받은 수가 마이너스이거나 인덱스 수보다 클 때
 			System.out.println("검색 위치 요류. 현재 리스트의 개수는 " + count + " 개 입니다.");
 			return ERROR_NUM;
 		}
@@ -121,11 +121,14 @@ public class TencoIntArray {
 		// 지정한 인덱스 번호의 요소를 삭제하기
 		public void removeElement(int position) {
 			
+			
 			// 방어적 코드
 			if(isEmpty()) {
 				System.out.println("삭제할 요소가 없습니다.");
 			}
 			
+			// position = 2를 할당 받음(넘겨 받은 값)
+			System.out.println("Log 2 : " + count);
 			// 인덱스 범위를 잘못 지정했다면 방어적 코드
 			if(position < 0 || position >= count) {
 				System.out.println("잘못된 요청입니다.");
@@ -136,10 +139,17 @@ public class TencoIntArray {
 			// [100] [200] [300] [400]
 			// [200] [300] [400] [] // 당겨짐
 			
-			for (int i = position; i < count - 1; i++) { // 사용자가 요청한 번호 = position 기준
+			//   0     1     2
+			// [100] [200] [300]
+			//               2           3    --> 횟수로는 한 번 반복한다.  
+			for (int i = position; i < count; i++) { // 사용자가 요청한 번호 = position 기준
+				System.out.println("Log 3 : " + i);
+				
 				//   0  
 				//   0 + 1
+				//   2    = intArr[3]
 				intArr[i] = intArr[i + 1];
+				// [100] [200] [0] [0]
 			}
 			count--;
 			
