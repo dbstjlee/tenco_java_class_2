@@ -54,7 +54,7 @@ public class FileCopy {
 		String resultFormat = String.format("소요 시간은 : %.6f초 입니다.", seconds); // .6 : 소수점 6번째 까지만 보여라
 		// %는 포맷 지정자의 시작
 		// f 지정자는 그 위치에 float, double 유형의 변수를 인자로 받아 처리하겠다.
-		System.out.println(resultFormat);b
+		System.out.println(resultFormat);
 	}
 
 }
