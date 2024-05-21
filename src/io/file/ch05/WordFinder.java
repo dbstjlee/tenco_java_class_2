@@ -22,7 +22,7 @@ public class WordFinder {
 			Map<String, Integer> wordCountMap = new HashMap<>();
 			String line;
 			while ((line = br.readLine()) != null) { // != null 일때까지 데이터를 읽어라.
-				String[] words = line.split("\\s+"); // 한 라인을 읽을 만큼의 배열이 생성
+				String[] words = line.split("\\s+"); // 한 라인을 읽을 만큼의 배열이 생성, \\s+ : 공백 기준
 
 				// 분리된 단어들을 반복 처리
 				for (String word : words) {
@@ -30,11 +30,12 @@ public class WordFinder {
 
 					// 빈 문자열이 아닐 경우에만 처리
 					if (!word.isEmpty()) {
-						// getOrDefault - 분리한 word 단어가 이미 map 구조에 존재한다면 현재
-						// 값을 가져오고 없다면 0을 반환한다.
+						// getOrDefault - 분리한 word 단어가 이미 map 구조에 존재한다면 
+						// 현재 값을 가져오고 없다면 0을 반환한다.
 						// wordCountMap key - String
 						// wordCountMap value - Integer
-						wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1); // 처음이라면 0을 셋팅. 그게 아니라면 + 1
+						wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1); 
+						// 처음이라면 0을 셋팅. 그게 아니라면 + 1
 					}
 				}
 			} // end of while
@@ -42,7 +43,7 @@ public class WordFinder {
 			String mostCommon = null; // 가장 많이 담을 변수
 			int maxCount = 0;
 			
-			// Key와 value 가 set 계열로 변환이 된다. 
+			// Key와 value가 set 계열로 변환이 된다. 
 			for(Map.Entry<String, Integer> entry : wordCountMap.entrySet()) {
 				if(entry.getValue() > maxCount) {
 					mostCommon = entry.getKey();
