@@ -8,6 +8,7 @@ public class UniqueUserIDSystem {
 
 	private HashSet<String> userIDs;
 
+	// 기본 생성자 호출 시 HashSet이 데이터 타입인 userIDs 객체 생성
 	public UniqueUserIDSystem() {
 		this.userIDs = new HashSet<String>();
 	}
@@ -16,6 +17,7 @@ public class UniqueUserIDSystem {
 	// 사용자 ID 등록 기능
 	// 정상적으로 들어가면 true
 	// 중복 발생하면 false
+	
 	public boolean registerUserID(String userId) {
 		return userIDs.add(userId);
 	}

@@ -26,44 +26,45 @@ public class MyLinkedList {
 		// if문: 인덱스 0: addElement("야스오") => 야스오가 createNode에 담김
 		// else문: 인덱스 1: addElement("티모")
 		if (head == null) {
-			// 맨 처음 요소를 저장하는 동작
+			// 맨 처음 요소를 저장하는 동작(맨 처음 head를 지정)
 			// 항상 head부터 찾아야한다.
 			head = createNode; // head에 넣어주면 저장이 됨.
 			// head가 null이어서 createNode에 담겨있던 야스오가 head에 들어감.
-			// 맨 처음 head를 지정해줌.
 		} else {
 			// 1) head에는 야스오가 담겨있고, 티모가 추가되는 상황(while문X)
 			// 항상 요소 찾기는 head부터 시작
 			Node preNode = head;// 내가 찾을 데이터 타입: Node
 			// head에 담겨있던 야스오를 preNode에 담아둠.
-			// => preNode = 야스오
-			// => [야스오][null]
+			// preNode = [야스오][null]
 
 			// 2) head에는 야스오가 담겨있고, 티모가 있고 소라카가 추가되는 상황(while문O)
-			// [야스오][티모.주소값], [티모][null] = preNode.next != null
+			// [야스오][티모.주소값], [티모][null]
+			// preNode = 야스오 preNode.next = 티모
 			while (preNode.next != null) { // 다음 요소가 있을때
-				preNode = preNode.next; // 티모의 주소값에 티모가 담김
-				// [야스오][티모.주소값] --> [티모][null]
-				// 티모 --> [티모][null]
+				preNode = preNode.next; // 티모가 preNode에 담김
+				// preNode = 티모
 			}
-			// [야스오][] => null 이라 while문 안 돌고 핵심 코드에 들어감
+			// 1) [야스오][null] => preNode.next가 null이라 while문 안 돌고 핵심 코드에 들어감
 			// 핵심 코드
-			// preNode.next가 null 이면(비어있음)
-			// [야스오][] --> [] = 티모의 주소값이 담김
-			// preNode[야스오][티모]
-			// [티모][소라카]
-			preNode.next = createNode; // createNode에 담겨있는 티모의 주소값이 preNode.next에 담김
+			preNode.next = createNode; // createNode에 담겨있는 티모가 preNode.next에 담김
 			// [야스오][티모.주소값] --> [티모][null] (뒤에 요소가 없다면 null 임)
+			
+			// 2) preNode = 티모
+			// createNode에 담긴 소라카가 preNode.next에 담김
+			// [티모][소라카.주소값] --> [소라카][null] => 소라카가 추가됨
 
 		}
 		count++; // 요소가 1개 증가함(티모가 추가됨)
-		return createNode; // 티모가 반환됨.
+		return createNode; 
+		// 1) 티모가 반환됨.
 		// 출력: [야스오][티모.주소값] --> [티모][null]
+		// 2) 소라카가 반환됨.
+		// 출력: [야스오][티모.주소값] --> [티모][소라카.주소값]--> [소라카][null]
 	}
 
 	// 노드를 1개 제거하는 메서드
+	//코드 수행 전
 	// [야스오][티모.주소값] --> [티모][소라카.주소값] --> [소라카][애쉬.주소값] -->[애쉬][null]
-	// 2
 	public Node removeElement(int index) {
 		// 방어적 코드
 		// index: 사용자가 요청한 값
@@ -72,7 +73,6 @@ public class MyLinkedList {
 			System.out.println("삭제할 위치 오류. 현재 리스트 개수는 " + count + "입니다.");
 			return null; // 리턴 타입인 Node가 데이터 타입이라서 null을 반환함
 		}
-		// 실행 시점 생각하기
 		// 맨 앞 요소를 삭제 요청 시
 		// 항상 요소를 찾을 때 시작은 head 부터 시작이다.
 		Node tempNode = head;
@@ -80,37 +80,32 @@ public class MyLinkedList {
 		if (index == 0) { // 인덱스 0번(야스오)라면
 			// 코드 시작 전 모습
 			// [야스오][티모.주소값] --> [티모][소라카.주소값] --> [소라카][애쉬.주소값] -->[애쉬][null]
-			head = tempNode.next; // 런타임 시점 // 다음 주소값(티모)을 비어있는 head에 담음.
-			// 코드 수행 후 모습
-			// [티모][소라카.주소값] --> [소라카][애쉬.주소값] -->[애쉬][null](야스오 삭제됨)
+			head = tempNode.next; // 런타임 시점 // tempNode.next(티모)를 비어있는 head에 담음.
+			// 출력은 head부터 됨. tempNode에 담아놓은 야스오는 출력되지 않음.
+			// 출력: [티모][소라카.주소값] --> [소라카][애쉬.주소값] -->[애쉬][null](head 였던 야스오가 삭제됨)
 		} else {
 			// 코드 시작 전 모습 => index = 2 이라고 가정 ---> 인덱스 값은 n-1 이라서 1임.
 			// 0 1 2
 			// [야스오][티모.주소값] --> [티모][소라카.주소값] --> [소라카][애쉬.주소값] -->[애쉬][null] (소라카 삭제가 목적)
-			// 링크를 제거하고 0의 주소값을 2라고 바꿔치기하기
-			Node preNode = null;// 지역변수 선언 // preNode(head(0번째))에 null 잠시 담아두기. 그래야 찾아갈 수 있음.
+			Node preNode = null;// 지역변수 선언 // preNode에 null 잠시 담아두기. 그래야 찾아갈 수 있음.
 			for (int i = 0; i < index; i++) {
 				// index = 2
 
 				// 0
 				preNode = tempNode; // 0번째에 항상 head가 들어감.
 				// 야스오가 담겨있는 tempNode(head)를 preNode(null)에 담기
-				tempNode = tempNode.next; // 다음(티모) 요소를 비어있는 tempNode에 담기
+				tempNode = tempNode.next; // 다음 요소(티모)를 비어있는 tempNode에 담기
 				// preNode = 야스오 tempNode = 티모
 
 				// 1
 				// preNode = tempNode; // 야스오가 담겨있는 preNode에 티모가 담겨있는 tempNode를 담음
-				// tempNode = tempNode.next; // 다음(소라카) 요소를 비어있는 tempNode에 담기
+				// tempNode = tempNode.next; // 다음 요소(소라카)를 비어있는 tempNode에 담기
 				// preNode = 티모 tempNode = 소라카
 
 			}
-
-			// pre - 티모
-			// temp - [소라카][애쉬]
-
 			// 반복문 끝나면
-			// [티모][소라카] = tempNode.next
-			// [티모][애쉬]
+			// preNode = 티모 tempNode = 소라카
+			// preNode.next = 소라카 tempNode.next = 애쉬
 			preNode.next = tempNode.next;// 애쉬의 주소값을 소라카의 주소값에 담기
 			// [티모][소라카.주소값] --> [소라카][애쉬.주소값]-->[애쉬][null]
 			// [소라카.주소값] <-- [애쉬.주소값]
