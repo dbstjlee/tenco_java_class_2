@@ -27,8 +27,8 @@ public class SingleCharReader {
 			if (charData != -1) {
 				// -1 -> 파일의 끝(EOF : End Of File) 가 아니라면 여기에 출력하라는 의미
 				// char --> 2byte (한글은 2byte로 거의 모든 글자 표현이 가능하다)
-				System.out.println("사용자가 입력한 값 : " + charData); // 한 입력 시 숫자 입력
-				System.out.println("사용자가 입력한 값 : " + (char) charData); // 한 입력 시 한 출력됨.
+				System.out.println("사용자가 입력한 값 : " + charData); // '한' 입력 시 숫자 입력
+				System.out.println("사용자가 입력한 값 : " + (char) charData); // '한' 입력 시 '한' 출력됨.
 			}
 
 		} catch (Exception e) {

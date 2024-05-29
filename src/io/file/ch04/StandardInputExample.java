@@ -39,11 +39,8 @@ public class StandardInputExample {
 			} // 내가 넣어놓았던 데이터를 다시 한번더 출력 가능
 
 			System.out.println("프로그램 종료 처리");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

@@ -10,22 +10,19 @@ public class FileCopyHelper {
 	// 파일 복사
 	public static void copyFile(String readFilePath, String writerFilePath) {
 
-		try (FileReader fr = new FileReader(readFilePath); // 문자 기반이라 FileReader와 Writer 사용
-				//readFilePath : 읽어들이는 파일 경로
+		try (FileReader fr = new FileReader(readFilePath); // 문자 기반이라 FileReader와 FileWriter 사용
+				// readFilePath : 읽어들이는 파일 경로
 				FileWriter fw = new FileWriter(writerFilePath)) {
-				// witerFilePath : 출력하는 파일 경로
-
+			// witerFilePath : 출력하는 파일 경로
 			int c;
 			while ((c = fr.read()) != -1) { // fr가 데이터가 없을때까지 읽어들여라
 				fw.write(c);// 출력하라
 			}
 			System.out.println("파일 복사 완료 : " + writerFilePath);// 파일이 복사됨.
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("파일 복사 중 오류 발생");
 		}
-
 	}
 
 	// 파일 복사 - 버퍼 활용
@@ -44,13 +41,11 @@ public class FileCopyHelper {
 				bufferedWriter.write(buffer, 0, numCharsRead); // 하나씩 읽어서 끝까지 가져와라, 0번째, numCharsRead 만큼
 				System.out.println("numCharsRead : " + numCharsRead);
 			}
-
 			System.out.println("버퍼를 사용한 파일 복사 완료 : " + writerFilePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("버퍼를 사용한 파일 복사 중 오류 발생");
 		}
-
 	}
 
 	// 메인 함수
@@ -58,7 +53,5 @@ public class FileCopyHelper {
 		FileCopyHelper.copyFile("Seoul.txt", "copySeol.txt"); // 클래스명 내의 copyFile 매서드 호출(복사할 파일 경로, 복사될 파일 경로)
 		System.out.println("-----------------------------");
 		FileCopyHelper.copyFileWithBuffer("NewYork.txt", "copyNewYork.txt");
-		
 	}// end of main
-
 }// end of class

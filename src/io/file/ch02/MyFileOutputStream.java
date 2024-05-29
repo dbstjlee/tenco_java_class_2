@@ -11,7 +11,7 @@ public class MyFileOutputStream {
 
 		long start = System.nanoTime();
 
-		// 데이터가 존재(이 코드 기준)(나가는거)
+		// 데이터가 존재(이 코드 기준)
 		String data = "Hello, Java TileOutputStream \n안녕반가워"; // H는 정수값으로 72를 받아옴.
 
 		// 1. 파일에다가 데이터를 저장하고 싶다면(바이트 기반)
@@ -21,11 +21,10 @@ public class MyFileOutputStream {
 		// 파일을 보냄. 없으면 알아서 만들어 줌.
 		// try (FileOutputStream fos = new FileOutputStream("output.txt" , true)) {
 		try (FileOutputStream fos = new FileOutputStream("output.txt", false)) {
-			// true : 이어 붙여넣기 (append) false : 이어 붙이기 off
-			// 수행 코드
+			// true : 이어 붙여넣기 (append) // false : 이어 붙이기 off
 			// data 변수(String) 가지고 있는 문자열들을 바이트 배열로 반환 처리
 			// byte[] bytes = data.getBytes(); // getBytes는 주소값으로 확인됨.
-			byte[] bytes = { 72, 101, 108, 108, 111 }; // Hello
+			byte[] bytes = { 72, 101, 108, 108, 111 }; // Hello를 의미
 			System.out.println("bytes : " + bytes);
 			for (int i = 0; i < bytes.length; i++) {
 				System.out.println("bytes[i] : " + bytes[i]);
@@ -43,7 +42,6 @@ public class MyFileOutputStream {
 		}
 		// 가지고 있는 데이터를 인코딩 해서 파일을 생성하여 보여줌.
 
-		// 동작 이해해보기
 		// 파일에 바이트 단위로 데이터를 쓰고
 		// 그 파일을 열었을 때 글자로 보이는 이유는 파일을 읽는 프로그램이
 		// 파일 내에 바이트 데이터를 문자로 해석해서(문자 인코딩) 보여 주었다.
@@ -53,5 +51,4 @@ public class MyFileOutputStream {
 		System.out.println("기반 스트림 파일 입출력 소요 시간 : " + duration);
 		// 아까보다 3배 느림(데이터가 많을수록 시간이 더 걸림)
 	}// end of main
-
 }
